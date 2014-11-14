@@ -1,4 +1,4 @@
-getfunction hasValidKeys(hash, keys){
+function hasValidKeys(hash, keys){
     var valid = true,
     existing_keys = Object.keys(hash);
 
