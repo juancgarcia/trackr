@@ -1,4 +1,4 @@
-function hasValidKeys(hash, keys){
+getfunction hasValidKeys(hash, keys){
     var valid = true,
     existing_keys = Object.keys(hash);
 
@@ -72,6 +72,24 @@ module.exports = function(api, next){
         // db.temperature.aggregate({$group:{_id:'$name', timestamp:{$max:"$timestamp"}, 'temp':{'$first':'$temp'}, 'unit':{'$first': '$unit'}}}).result
         
         // next(err, dummy_nodes);
+    };
+
+    api.temps.getList = function(next){
+        var
+        err = null,
+        pattern = 'node:',
+        dummy_nodes = [
+            {name: 'foo', temp: 22},
+            {name: 'bar', temp: 19}
+        ];
+
+        models.Temperature.find()
+            .sort({'timestamp': -1})
+            .limit(20)
+            .exec(function(err, values) {
+                 // `posts` will be of length 20
+                 next(err, values)
+            });
     };
 
     if(next) next();

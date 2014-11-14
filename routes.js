@@ -8,6 +8,17 @@ function json_end(resp, code, payload){
 module.exports = function(api, next){
     api.routes = {};
 
+    api.routes['/api/temperature/list'] = {
+        get: function(req, resp, api){
+            api.temps.getList(function(err, nodes)){
+                if(err)
+                    return json_end(function(err, 400, "Bad Juju"));
+
+                return json_end(resp, 200, nodes);
+            }
+        }
+    }
+
     api.routes['/api/temperature'] = {
         get: function(req, resp, api){
             api.temps.getLatest(function(err, nodes){
