@@ -83,7 +83,7 @@ module.exports = function(api, next){
             {name: 'bar', temp: 19}
         ];
 
-        models.Temperature.find()
+        models.temperature.model.find()
             .sort({'timestamp': -1})
             .limit(20)
             .exec(function(err, values) {
